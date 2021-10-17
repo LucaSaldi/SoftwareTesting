@@ -1,15 +1,13 @@
-# laat de user het aantal blogs zien
-# laat de user kiezen
 from blog import Blog
 
-blogs = dict()
-MENU_PROMPT = 'Enter "c" to create a blog, "l" to list blogs, "r" to read one, "p" to create a post, ''"q" to quit:'
-POST_TEMPLATE = '''
----{}---
 
+MENU_PROMPT = '\nEnter "c" to create a blog, "l" to list them, "r" to read one, "p" to write a post, or "q" to quit: '
+POST_TEMPLATE = """
+--- {} ---
 {}
+"""
 
-'''
+blogs = dict()
 
 
 def menu():
@@ -18,11 +16,11 @@ def menu():
     while selection != 'q':
         if selection == 'c':
             ask_create_blog()
-        elif selection == "l":
+        elif selection == 'l':
             print_blogs()
-        elif selection == "r":
+        elif selection == 'r':
             ask_read_blog()
-        elif selection == "p":
+        elif selection == 'p':
             ask_create_post()
         selection = input(MENU_PROMPT)
 
@@ -40,12 +38,13 @@ def ask_create_blog():
 
 
 def ask_read_blog():
-    title = input('Enter the blog title you want to read: ')
+    title = input("Enter the blog title you want to read: ")
+
     print_posts(blogs[title])
 
 
-def print_posts(blog1):
-    for post in blog1.posts:
+def print_posts(blog):
+    for post in blog.posts:
         print_post(post)
 
 
@@ -54,8 +53,9 @@ def print_post(post):
 
 
 def ask_create_post():
-    blog_name = input('Enter the blog title you want to write your post in: ')
-    title = input('Enter your post title: ')
-    content = input('Enter your post content: ')
+    blog = input("Enter the blog title you want to create a post in: ")
+    title = input("Enter your post title: ")
+    content = input("Enter your post content: ")
 
-    blogs[blog_name].create_post(title, content)
+    blogs[blog].create_post(title, content)
+
