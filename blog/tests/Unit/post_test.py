@@ -13,3 +13,9 @@ class PostTest(TestCase):
 
         self.assertEqual('Test', p.title)
         self.assertEqual('Test Content', p.content)
+
+    def test_json(self):
+        p = Post('Test', 'Test Content')
+        expected = {'title': 'Test', 'content': 'Test Content'}
+#gebruik assertDictEqual, anders kijkt hij of ze exact hetzelfde object zijn, dit is niet zo
+        self.assertDictEqual(expected, p.json())
